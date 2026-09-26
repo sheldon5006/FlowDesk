@@ -59,3 +59,8 @@ FlowDesk is ultimately a learning platform for exploring:
 **Business Rules → Clean Architecture → AI Integration → RAG → Distributed Systems → Microservices**
 
 The knowledge gained from FlowDesk will be reused when designing future software products and business ideas.
+
+<img width="1916" height="855" alt="image" src="https://github.com/user-attachments/assets/2383be28-85b2-47fd-a525-63b0e8fd817e" />
+<img width="1870" height="836" alt="image" src="https://github.com/user-attachments/assets/124236a2-61ee-495f-bf8b-8f4e9620ae64" />
+
+
