@@ -1,0 +1,52 @@
+<section class="shift-page">
+
+  <header class="page-header">
+
+    <div>
+      <h2>Shifts</h2>
+
+      <p>
+        Create, schedule and manage workforce shifts.
+      </p>
+    </div>
+
+    <div class="page-actions">
+
+      <p-button
+        label="Create Shift"
+        icon="pi pi-plus"
+        (click)="openCreateShiftDialog()"
+      />
+
+    </div>
+
+  </header>
+
+
+  <section class="shift-list-section">
+
+    <app-shift-list />
+
+  </section>
+
+
+  <p-dialog
+    header="Create Shift"
+    [(visible)]="createShiftDialogVisible"
+    [modal]="true"
+    [draggable]="false"
+    [resizable]="false"
+    [style]="{ width: '32rem' }"
+    [breakpoints]="{
+      '768px': '70vw',
+      '640px': '92vw'
+    }"
+  >
+
+    <app-shift-form
+      (shiftCreated)="onShiftCreated()"
+    />
+
+  </p-dialog>
+
+</section>

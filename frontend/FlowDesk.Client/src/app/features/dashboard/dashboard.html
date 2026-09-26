@@ -1,0 +1,79 @@
+<section class="dashboard">
+
+  <header class="page-header">
+    <div>
+      <h2>Dashboard</h2>
+      <p>
+        Overview of your workforce operations.
+      </p>
+    </div>
+  </header>
+
+  @if (loading) {
+
+    <p>Loading dashboard...</p>
+
+  } @else if (errorMessage) {
+
+    <p>{{ errorMessage }}</p>
+
+  } @else if (summary) {
+
+    <div class="stats-grid">
+
+      <p-card>
+        <div class="stat-card">
+          <span class="stat-label">
+            Total Employees
+          </span>
+
+          <strong class="stat-value">
+            {{ summary.totalEmployees }}
+          </strong>
+        </div>
+      </p-card>
+
+
+      <p-card>
+        <div class="stat-card">
+          <span class="stat-label">
+            Upcoming Shifts
+          </span>
+
+          <strong class="stat-value">
+            {{ summary.upcomingShifts }}
+          </strong>
+        </div>
+      </p-card>
+
+
+      <p-card>
+        <div class="stat-card">
+          <span class="stat-label">
+            Pending Assignments
+          </span>
+
+          <strong class="stat-value">
+            {{ summary.pendingAssignments }}
+          </strong>
+        </div>
+      </p-card>
+
+
+      <p-card>
+        <div class="stat-card">
+          <span class="stat-label">
+            Unfilled Positions
+          </span>
+
+          <strong class="stat-value">
+            {{ summary.unfilledPositions }}
+          </strong>
+        </div>
+      </p-card>
+
+    </div>
+
+  }
+
+</section>

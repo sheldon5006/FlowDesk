@@ -1,0 +1,114 @@
+<section class="employee-list">
+
+  <div class="table-toolbar">
+
+    <div>
+      <h3>Workforce</h3>
+
+      <p>
+        Employees registered in FlowDesk.
+      </p>
+    </div>
+    
+
+
+  </div>
+
+
+  <div class="table-shell">
+
+    @if (loading) {
+
+      <div class="loading-state">
+        Loading employees...
+      </div>
+
+    } @else {
+
+          <input
+      pInputText
+      type="text"
+      placeholder="Search employees..."
+      (input)="onGlobalFilter($event, dt)"
+    />
+
+      <p-table
+        #dt
+        [value]="employees"
+        dataKey="id"
+        [globalFilterFields]="[
+          'firstName',
+          'lastName',
+          'email'
+        ]"
+        [paginator]="true"
+        [rows]="10"
+        [rowsPerPageOptions]="[10, 25, 50]"
+        [tableStyle]="{
+          'min-width': '50rem'
+        }"
+      >
+
+        <ng-template #header>
+
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+
+        </ng-template>
+
+
+        <ng-template #body let-employee>
+
+          <tr>
+
+            <td>
+              <div class="employee-name">
+
+                <strong>
+                  {{ employee.firstName }}
+                  {{ employee.lastName }}
+                </strong>
+
+              </div>
+            </td>
+
+
+            <td>
+              {{ employee.email }}
+            </td>
+
+
+            <td>
+              <p-tag
+                value="Active"
+                severity="success"
+              />
+            </td>
+
+
+            <td>
+
+              <p-button
+                icon="pi pi-ellipsis-h"
+                severity="secondary"
+                [text]="true"
+                size="small"
+              />
+
+            </td>
+
+          </tr>
+
+        </ng-template>
+
+      </p-table>
+
+    }
+
+  </div>
+
+</section>

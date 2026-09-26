@@ -1,0 +1,241 @@
+<section class="availability-page">
+
+  <header class="page-header">
+
+    <div>
+      <h2>Availability</h2>
+
+      <p>
+        Manage when this employee is available to work.
+      </p>
+    </div>
+
+    <p-button
+      label="Add Availability"
+      icon="pi pi-plus"
+      (click)="openAddDialog()"
+    />
+
+  </header>
+
+
+  <section class="availability-content">
+
+    <div class="section-header">
+
+      <div>
+        <h3>Weekly Availability</h3>
+
+        <p>
+          Current working availability for the employee.
+        </p>
+      </div>
+
+    </div>
+
+
+    @if (loading) {
+
+      <div class="loading-state">
+        Loading availability...
+      </div>
+
+    } @else if (availabilities.length === 0) {
+
+      <div class="empty-state">
+
+        <div class="empty-icon">
+          <i class="pi pi-calendar"></i>
+        </div>
+
+        <h3>No availability yet</h3>
+
+        <p>
+          Add the employee's available working hours.
+        </p>
+
+        <p-button
+          label="Add Availability"
+          icon="pi pi-plus"
+          [outlined]="true"
+          (click)="openAddDialog()"
+        />
+
+      </div>
+
+    } @else {
+
+      <div class="availability-grid">
+
+        @for (
+          item of availabilities;
+          track item.id
+        ) {
+
+          <div class="availability-card">
+
+            <div class="availability-info">
+
+              <span class="day-label">
+                {{ item.dayOfWeek }}
+              </span>
+
+              <span class="time-range">
+                {{ item.startTime }}
+                -
+                {{ item.endTime }}
+              </span>
+
+            </div>
+
+
+            <p-button
+              icon="pi pi-trash"
+              severity="danger"
+              [text]="true"
+              [rounded]="true"
+              [loading]="
+                deletingAvailabilityId === item.id
+              "
+              (click)="delete(item.id)"
+              ariaLabel="Delete availability"
+            />
+
+          </div>
+
+        }
+
+      </div>
+
+    }
+
+  </section>
+
+
+  <!-- Add Availability Dialog -->
+
+  <p-dialog
+    header="Add Availability"
+    [(visible)]="addDialogVisible"
+    [modal]="true"
+    [draggable]="false"
+    [resizable]="false"
+    [style]="{ width: '32rem' }"
+    [breakpoints]="{
+      '768px': '70vw',
+      '640px': '92vw'
+    }"
+  >
+
+    <form
+      [formGroup]="form"
+      (ngSubmit)="save()"
+      class="availability-form"
+    >
+
+      <div class="form-field">
+
+        <label for="dayOfWeek">
+          Day
+        </label>
+
+       <p-select
+          inputId="dayOfWeek"
+          formControlName="dayOfWeek"
+          [options]="availableDays"
+          optionLabel="label"
+          optionValue="value"
+          placeholder="Select a day"
+          [fluid]="true"
+        />
+
+        @if (
+          form.controls['dayOfWeek'].invalid &&
+          form.controls['dayOfWeek'].touched
+        ) {
+          <small class="field-error">
+            Please select a day.
+          </small>
+        }
+
+      </div>
+
+
+      <div class="form-row">
+
+        <div class="form-field">
+
+          <label for="startTime">
+            Start time
+          </label>
+
+          <input
+            pInputText
+            id="startTime"
+            type="time"
+            formControlName="startTime"
+          />
+
+          @if (
+            form.controls['startTime'].invalid &&
+            form.controls['startTime'].touched
+          ) {
+            <small class="field-error">
+              Start time is required.
+            </small>
+          }
+
+        </div>
+
+
+        <div class="form-field">
+
+          <label for="endTime">
+            End time
+          </label>
+
+          <input
+            pInputText
+            id="endTime"
+            type="time"
+            formControlName="endTime"
+          />
+
+          @if (
+            form.controls['endTime'].invalid &&
+            form.controls['endTime'].touched
+          ) {
+            <small class="field-error">
+              End time is required.
+            </small>
+          }
+
+        </div>
+
+      </div>
+
+
+      <div class="form-actions">
+
+        <p-button
+          type="button"
+          label="Cancel"
+          severity="secondary"
+          [outlined]="true"
+          (click)="closeAddDialog()"
+        />
+
+        <p-button
+          type="submit"
+          label="Add Availability"
+          icon="pi pi-check"
+          [loading]="saving"
+        />
+
+      </div>
+
+    </form>
+
+  </p-dialog>
+
+</section>

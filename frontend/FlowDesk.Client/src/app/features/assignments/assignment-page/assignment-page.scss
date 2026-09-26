@@ -1,0 +1,23 @@
+.assignment-page {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.page-header {
+  margin-bottom: 2rem;
+}
+
+.page-header h2 {
+  margin: 0;
+
+  font-size: 1.8rem;
+  font-weight: 700;
+
+  letter-spacing: -0.02em;
+}
+
+.page-header p {
+  margin: 0.4rem 0 0;
+
+  color: var(--p-text-muted-color);
+}

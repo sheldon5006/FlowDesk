@@ -1,0 +1,62 @@
+.assignment-list {
+  width: 100%;
+}
+
+.table-toolbar {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.table-toolbar h3 {
+  margin: 0;
+
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.table-toolbar p {
+  margin: 0.3rem 0 0;
+
+  color: var(--p-text-muted-color);
+  font-size: 0.9rem;
+}
+
+.table-toolbar input {
+  width: 250px;
+}
+
+.table-shell {
+  padding: 1rem;
+
+  border-radius: 1.25rem;
+
+  background: var(--p-surface-100);
+
+  box-shadow:
+    8px 8px 18px rgba(163, 171, 187, 0.18),
+    -8px -8px 18px rgba(255, 255, 255, 0.8);
+}
+
+.loading-state {
+  padding: 2rem;
+
+  text-align: center;
+
+  color: var(--p-text-muted-color);
+}
+
+@media (max-width: 750px) {
+
+  .table-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .table-toolbar input {
+    width: 100%;
+  }
+}

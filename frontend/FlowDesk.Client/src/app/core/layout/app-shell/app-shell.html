@@ -1,0 +1,70 @@
+<div class="app-shell">
+
+  <aside class="sidebar">
+
+    <div class="brand">
+      <div class="brand-mark">F</div>
+
+      <div>
+        <div class="brand-name">FlowDesk</div>
+        <div class="brand-subtitle">Workforce Management</div>
+      </div>
+    </div>
+
+    <nav class="navigation">
+
+      <a routerLink="/dashboard">
+        Dashboard
+      </a>
+
+      <a routerLink="/employees">
+        Employees
+      </a>
+
+      <a routerLink="/availability">
+        Availability
+      </a>
+
+      <a routerLink="/shifts">
+        Shifts
+      </a>
+
+      <a routerLink="/assignments">
+        Assignments
+      </a>
+
+    </nav>
+
+    <div class="sidebar-footer">
+
+      <a routerLink="/settings">
+        Settings
+      </a>
+
+    </div>
+
+  </aside>
+
+  <main class="main-area">
+
+    <header class="topbar">
+
+      <div>
+        <h1>FlowDesk</h1>
+      </div>
+
+      <div class="topbar-actions">
+        <span>Manager</span>
+      </div>
+
+    </header>
+
+    <section class="page-content">
+
+      <router-outlet />
+
+    </section>
+
+  </main>
+
+</div>

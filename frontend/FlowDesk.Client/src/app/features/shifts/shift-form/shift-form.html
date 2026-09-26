@@ -1,0 +1,147 @@
+<form
+  [formGroup]="shiftForm"
+  (ngSubmit)="createShift()"
+  class="shift-form"
+>
+
+  <div class="form-field">
+
+    <label for="shift-date">
+      Date
+    </label>
+
+    <p-datepicker
+      inputId="shift-date"
+      formControlName="date"
+      dateFormat="dd.mm.yy"
+      [showIcon]="true"
+      [fluid]="true"
+      appendTo="body"
+    />
+
+    @if (
+      shiftForm.controls['date'].invalid &&
+      shiftForm.controls['date'].touched
+    ) {
+      <small class="field-error">
+        Date is required.
+      </small>
+    }
+
+  </div>
+
+
+  <div class="form-row">
+
+    <div class="form-field">
+
+      <label for="shift-start-time">
+        Start time
+      </label>
+
+      <p-datepicker
+        inputId="shift-start-time"
+        formControlName="startTime"
+        [timeOnly]="true"
+        [showIcon]="true"
+        [fluid]="true"
+        appendTo="body"
+      />
+
+      @if (
+        shiftForm.controls['startTime'].invalid &&
+        shiftForm.controls['startTime'].touched
+      ) {
+        <small class="field-error">
+          Start time is required.
+        </small>
+      }
+
+    </div>
+
+
+    <div class="form-field">
+
+      <label for="shift-end-time">
+        End time
+      </label>
+
+      <p-datepicker
+        inputId="shift-end-time"
+        formControlName="endTime"
+        [timeOnly]="true"
+        [showIcon]="true"
+        [fluid]="true"
+        appendTo="body"
+      />
+
+      @if (
+        shiftForm.controls['endTime'].invalid &&
+        shiftForm.controls['endTime'].touched
+      ) {
+        <small class="field-error">
+          End time is required.
+        </small>
+      }
+
+    </div>
+
+  </div>
+
+
+  <div class="form-field">
+
+    <label for="shift-location">
+      Location
+    </label>
+
+    <input
+      pInputText
+      id="shift-location"
+      type="text"
+      formControlName="location"
+      placeholder="Berlin Store"
+      fluid
+    />
+
+    @if (
+      shiftForm.controls['location'].invalid &&
+      shiftForm.controls['location'].touched
+    ) {
+      <small class="field-error">
+        Location is required.
+      </small>
+    }
+
+  </div>
+
+
+  <div class="form-field">
+
+    <label for="required-employees">
+      Required employees
+    </label>
+
+    <p-inputnumber
+      inputId="required-employees"
+      formControlName="requiredEmployees"
+      [min]="1"
+      [showButtons]="true"
+      [fluid]="true"
+    />
+
+  </div>
+
+
+  <div class="form-actions">
+
+    <p-button
+      type="submit"
+      label="Create Shift"
+      icon="pi pi-check"
+      [loading]="loading"
+    />
+
+  </div>
+
+</form>

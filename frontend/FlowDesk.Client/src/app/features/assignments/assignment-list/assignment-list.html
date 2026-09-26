@@ -1,0 +1,161 @@
+<section class="assignment-list">
+
+  <div class="table-toolbar">
+
+    <div>
+      <h3>Assignment Overview</h3>
+
+      <p>
+        Employees assigned to scheduled shifts.
+      </p>
+    </div>
+
+
+
+  </div>
+
+
+  <div class="table-shell">
+
+    @if (loading) {
+
+      <div class="loading-state">
+        Loading assignments...
+      </div>
+
+    } @else {
+            <input
+      pInputText
+      type="text"
+      placeholder="Search assignments..."
+      (input)="onGlobalFilter($event, dt)"
+    />
+      <p-table
+        #dt
+        [value]="assignments"
+        dataKey="id"
+        [globalFilterFields]="[
+          'employeeName',
+          'location',
+          'status'
+        ]"
+        [paginator]="true"
+        [rows]="10"
+        [rowsPerPageOptions]="[
+          10,
+          25,
+          50
+        ]"
+        [tableStyle]="{
+          'min-width': '65rem'
+        }"
+      >
+
+        <ng-template #header>
+
+          <tr>
+            <th>Employee</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Location</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+
+        </ng-template>
+
+
+        <ng-template
+          #body
+          let-assignment
+        >
+
+          <tr>
+
+            <td>
+              <strong>
+                {{ assignment.employeeName }}
+              </strong>
+            </td>
+
+            <td>
+              {{ assignment.shiftDate }}
+            </td>
+
+            <td>
+              {{ assignment.startTime }}
+              -
+              {{ assignment.endTime }}
+            </td>
+
+            <td>
+              {{ assignment.location }}
+            </td>
+
+            <td>
+
+              @switch (assignment.status) {
+
+                @case ('Pending') {
+                  <p-tag
+                    value="Pending"
+                    severity="warn"
+                  />
+                }
+
+                @case ('Confirmed') {
+                  <p-tag
+                    value="Confirmed"
+                    severity="success"
+                  />
+                }
+
+                @case ('Cancelled') {
+                  <p-tag
+                    value="Cancelled"
+                    severity="danger"
+                  />
+                }
+
+              }
+
+            </td>
+
+
+            <td>
+
+              @if (
+                assignment.status === 'Pending'
+              ) {
+
+                <p-button
+                  label="Confirm"
+                  icon="pi pi-check"
+                  size="small"
+                  severity="success"
+                  [loading]="
+                    confirmingAssignmentId ===
+                    assignment.id
+                  "
+                  (click)="
+                    confirmAssignment(
+                      assignment.id
+                    )
+                  "
+                />
+
+              }
+
+            </td>
+
+          </tr>
+
+        </ng-template>
+
+      </p-table>
+
+    }
+
+  </div>
+
+</section>
