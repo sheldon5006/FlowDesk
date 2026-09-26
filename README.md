@@ -1,0 +1,61 @@
+# FlowDesk
+
+**FlowDesk** is a Workforce Operations & Smart Scheduling Platform built as a practical **software architecture laboratory**.
+
+The project focuses on understanding how real-world software evolves from a simple business idea into a maintainable, scalable system.
+
+### 🚀 What FlowDesk Does
+
+FlowDesk helps managers manage employees, availability, shifts, and assignments.
+
+Core workflow:
+
+`Employee → Availability → Shift → Candidate Selection → Assignment → Confirmation → Completion`
+
+The system currently includes:
+
+- Employee management
+- Employee availability
+- Shift management and lifecycle
+- Smart employee candidate selection
+- Assignment management
+- Dashboard and workforce overview
+- RESTful API with PostgreSQL
+
+### 🏗️ Architecture
+
+FlowDesk currently follows a **modular monolith / layered architecture** with clear separation between:
+
+`Controller → Service → Repository → Database`
+
+The goal is to learn how to apply business rules, separation of concerns, dependency injection, DTOs, EF Core, and feature-based frontend architecture before introducing more complex distributed architectures.
+
+### 🛠️ Tech Stack
+
+**Backend**
+- .NET 10 / ASP.NET Core Web API
+- Entity Framework Core
+- PostgreSQL
+- REST APIs
+- Dependency Injection
+
+**Frontend**
+- Angular 20
+- TypeScript
+- PrimeNG
+- RxJS
+- Soft neumorphic UI
+
+### 🤖 AI & Future Architecture
+
+AI will be introduced gradually after the core business logic is stable. Planned areas include intelligent scheduling, candidate ranking, RAG for company policies and contextual information, and eventually exploration of Java/Spring Boot and microservices.
+
+This project is **AI-assisted but engineering-driven** — the goal is to understand the architecture, business logic, and implementation rather than simply generate an application with AI.
+
+### 🎯 Project Goal
+
+FlowDesk is ultimately a learning platform for exploring:
+
+**Business Rules → Clean Architecture → AI Integration → RAG → Distributed Systems → Microservices**
+
+The knowledge gained from FlowDesk will be reused when designing future software products and business ideas.
