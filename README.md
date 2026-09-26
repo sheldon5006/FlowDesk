@@ -46,13 +46,8 @@ The goal is to learn how to apply business rules, separation of concerns, depend
 - RxJS
 - Soft neumorphic UI
 
-### 🤖 AI & Future Architecture
 
-AI will be introduced gradually after the core business logic is stable. Planned areas include intelligent scheduling, candidate ranking, RAG for company policies and contextual information, and eventually exploration of Java/Spring Boot and microservices.
-
-This project is **AI-assisted but engineering-driven** — the goal is to understand the architecture, business logic, and implementation rather than simply generate an application with AI.
-
-### 🎯 Project Goal
+### 🎯 Future Project Goal - Possibly
 
 FlowDesk is ultimately a learning platform for exploring:
 
