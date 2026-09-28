@@ -1,4 +1,10 @@
 
-PUT https://localhost:7113/api/shifts/1/complete
+PUT https://localhost:7113/api/employees/1/availability/1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6ImVtcGxveWVlQGZsb3dkZXNrLmNvbSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkVtcGxveWVlIiwiZW1wbG95ZWVJZCI6IjEiLCJleHAiOjE3OTA2MjA3ODIsImlzcyI6IkZsb3dEZXNrLkFwaSIsImF1ZCI6IkZsb3dEZXNrLkNsaWVudCJ9.u8s7snfStv7a1jiWPhKOSPaxXMk_5IsN3uyiBs87cGU
 
-
+{
+  "dayOfWeek": "Monday",
+  "startTime": "09:00:00",
+  "endTime": "17:00:00"
+}

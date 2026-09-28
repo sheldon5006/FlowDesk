@@ -13,35 +13,45 @@
 
     <nav class="navigation">
 
-      <a routerLink="/dashboard">
-        Dashboard
-      </a>
+      @if (isAdmin) {
+        <a routerLink="/dashboard">
+          Dashboard
+        </a>
 
-      <a routerLink="/employees">
-        Employees
-      </a>
+        <a routerLink="/employees">
+          Employees
+        </a>
+      }
 
       <a routerLink="/availability">
         Availability
       </a>
 
-      <a routerLink="/shifts">
-        Shifts
-      </a>
+      @if (isAdmin) {
+        <a routerLink="/shifts">
+          Shifts
+        </a>
+      }
 
       <a routerLink="/assignments">
         Assignments
       </a>
 
+      @if (isAdmin) {
+        <a routerLink="/users">
+          Users
+        </a>
+      }
+
     </nav>
 
-    <div class="sidebar-footer">
-
-      <a routerLink="/settings">
-        Settings
-      </a>
-
-    </div>
+    @if (isAdmin) {
+      <div class="sidebar-footer">
+        <a routerLink="/settings">
+          Settings
+        </a>
+      </div>
+    }
 
   </aside>
 
@@ -54,7 +64,16 @@
       </div>
 
       <div class="topbar-actions">
-        <span>Manager</span>
+
+        <span>{{ role }}</span>
+
+        <p-button
+          label="Logout"
+          icon="pi pi-sign-out"
+          severity="secondary"
+          (onClick)="logout()"
+        />
+
       </div>
 
     </header>

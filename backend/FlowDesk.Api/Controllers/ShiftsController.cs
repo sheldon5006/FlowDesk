@@ -1,11 +1,13 @@
 ﻿using FlowDesk.Api.DTOs.Shifts;
 using FlowDesk.Api.Services.Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FlowDesk.Api.Controllers
 {
     [ApiController]
     [Route("api/shifts")]
+    [Authorize(Roles = "Admin")]
     public class ShiftsController : ControllerBase
     {
         private readonly IShiftService _shiftService;

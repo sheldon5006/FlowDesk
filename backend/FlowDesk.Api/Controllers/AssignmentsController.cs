@@ -1,5 +1,6 @@
 ﻿using FlowDesk.Api.DTOs;
 using FlowDesk.Api.Services.Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FlowDesk.Api.Controllers
@@ -7,6 +8,7 @@ namespace FlowDesk.Api.Controllers
 
     [ApiController]
     [Route("api/assignments")]
+    [Authorize]
     public class AssignmentsController : ControllerBase
     {
         private readonly IAssignmentService _assignmentService;
@@ -18,6 +20,7 @@ namespace FlowDesk.Api.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create(CreateAssignmentDto dto)
         {
             try
@@ -41,6 +44,7 @@ namespace FlowDesk.Api.Controllers
         }
 
         [HttpGet("shift/{shiftId:int}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetByShift(int shiftId)
         {
             var assignments =
@@ -50,6 +54,7 @@ namespace FlowDesk.Api.Controllers
         }
 
         [HttpGet("employee/{employeeId:int}")]
+        [Authorize(Roles = "Admin,Employee")]
         public async Task<IActionResult> GetByEmployee(
             int employeeId)
         {
@@ -60,6 +65,7 @@ namespace FlowDesk.Api.Controllers
         }
 
         [HttpPut("{assignmentId:int}/confirm")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Confirm(int assignmentId)
         {
             try
@@ -84,6 +90,7 @@ namespace FlowDesk.Api.Controllers
         }
 
         [HttpDelete("{assignmentId:int}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int assignmentId)
         {
             var deleted =
@@ -98,6 +105,7 @@ namespace FlowDesk.Api.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetAll()
         {
             var assignments =

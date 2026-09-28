@@ -11,5 +11,11 @@ namespace FlowDesk.Api.Services.Interface
             CreateAvailabilityDto dto);
 
         Task<bool> DeleteAsync(int employeeId, int id);
+
+        Task<AvailabilityDto?> UpdateAsync( int employeeId,
+                                int availabilityId,
+                                UpdateAvailabilityDto dto);
+
+
     }
 }

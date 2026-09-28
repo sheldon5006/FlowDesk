@@ -1,0 +1,24 @@
+﻿using FlowDesk.Api.Models;
+
+namespace FlowDesk.Api.DTOs
+{
+    public class LoginDto
+    {
+        public string Email { get; set; } = string.Empty;
+
+        public string Password { get; set; } = string.Empty;
+    }
+
+    public class LoginResponseDto
+    {
+        public string Token { get; set; } = string.Empty;
+
+        public int UserId { get; set; }
+
+        public string Email { get; set; } = string.Empty;
+
+        public UserRole Role { get; set; }
+
+        public int? EmployeeId { get; set; }
+    }
+}

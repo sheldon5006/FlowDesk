@@ -22,6 +22,7 @@ import {
   CreateAvailability
 } from '../../../models/availability.model';
 import { InputTextModule } from 'primeng/inputtext';
+import { AuthService } from '../../../core/services/auth/auth.service';
 
 @Component({
   selector: 'app-availability',
@@ -40,7 +41,7 @@ import { InputTextModule } from 'primeng/inputtext';
 export class AvailabilityComponent implements OnInit {
 
   // Temporary until authentication/employee selection is implemented.
-  employeeId = 2;
+employeeId: number | null = null;
 
   availabilities: Availability[] = [];
 
@@ -66,7 +67,8 @@ export class AvailabilityComponent implements OnInit {
 
   constructor(
     private readonly fb: FormBuilder,
-    private readonly availabilityService: AvailabilityService
+    private readonly availabilityService: AvailabilityService,
+     private readonly authService: AuthService
   ) {
     this.form = this.fb.nonNullable.group({
       dayOfWeek: [
@@ -86,31 +88,33 @@ export class AvailabilityComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
+ngOnInit(): void {
+  this.employeeId = this.authService.getEmployeeId();
+
+  if (this.employeeId !== null) {
     this.loadAvailability();
   }
+}
 
-  loadAvailability(): void {
-    this.loading = true;
-
-    this.availabilityService
-      .getByEmployee(this.employeeId)
-      .subscribe({
-        next: (data) => {
-          this.availabilities = data;
-          this.loading = false;
-        },
-
-        error: (error) => {
-          console.error(
-            'Failed to load availability',
-            error
-          );
-
-          this.loading = false;
-        }
-      });
+loadAvailability(): void {
+  if (this.employeeId === null) {
+    return;
   }
+
+  this.loading = true;
+
+  this.availabilityService
+    .getByEmployee(this.employeeId)
+    .subscribe({
+      next: (data) => {
+        this.availabilities = data;
+        this.loading = false;
+      },
+      error: () => {
+        this.loading = false;
+      }
+    });
+}
 
   openAddDialog(): void {
     this.resetForm();
@@ -122,44 +126,36 @@ export class AvailabilityComponent implements OnInit {
     this.addDialogVisible = false;
   }
 
-  save(): void {
-    if (this.form.invalid) {
+save(): void {
+  if (this.form.invalid || this.employeeId === null) {
+    this.form.markAllAsTouched();
+    return;
+  }
+
+  this.saving = true;
+
+  const data: CreateAvailability = this.form.getRawValue();
+
+  this.availabilityService
+    .create(this.employeeId, data)
+    .subscribe({
+      next: () => {
+        this.saving = false;
+        this.resetForm();
+        this.closeAddDialog();
+        this.loadAvailability();
+      },
+      error: () => {
+        this.saving = false;
+      }
+    });
+}
+
+  delete(availabilityId: number): void {
+      if (this.form.invalid || this.employeeId === null) {
       this.form.markAllAsTouched();
       return;
     }
-
-    const data: CreateAvailability =
-      this.form.getRawValue();
-
-    this.saving = true;
-
-    this.availabilityService
-      .create(this.employeeId, data)
-      .subscribe({
-        next: () => {
-
-          this.saving = false;
-
-          this.addDialogVisible = false;
-
-          this.resetForm();
-
-          this.loadAvailability();
-        },
-
-        error: (error) => {
-
-          this.saving = false;
-
-          console.error(
-            'Failed to create availability',
-            error
-          );
-        }
-      });
-  }
-
-  delete(availabilityId: number): void {
 
     this.deletingAvailabilityId =
       availabilityId;

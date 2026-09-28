@@ -73,5 +73,62 @@ namespace FlowDesk.Api.Controllers
 
             return NoContent();
         }
+
+        [HttpPut("{availabilityId:int}")]
+        public async Task<IActionResult> Update(
+    int employeeId,
+    int availabilityId,
+    UpdateAvailabilityDto dto)
+        {
+            if (!CanAccessEmployee(employeeId))
+            {
+                return Forbid();
+            }
+
+            try
+            {
+                var result = await _availabilityService.UpdateAsync(
+                    employeeId,
+                    availabilityId,
+                    dto);
+
+                if (result == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(result);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new
+                {
+                    message = ex.Message
+                });
+            }
+            catch (InvalidOperationException ex)
+            {
+                return Conflict(new
+                {
+                    message = ex.Message
+                });
+            }
+        }
+
+        private bool CanAccessEmployee(int employeeId)
+        {
+            if (User.IsInRole("Admin"))
+            {
+                return true;
+            }
+
+            var employeeIdClaim =
+                User.FindFirst("employeeId")?.Value;
+
+            return int.TryParse(
+                       employeeIdClaim,
+                       out var loggedInEmployeeId)
+                   && loggedInEmployeeId == employeeId;
+        }
     }
 }

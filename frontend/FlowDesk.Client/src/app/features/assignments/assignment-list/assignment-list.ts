@@ -13,6 +13,10 @@ import {
 } from '../../../core/services/assignment/assignment.service';
 
 import {
+  AuthService
+} from '../../../core/services/auth/auth.service';
+
+import {
   Assignment
 } from '../../../models/assignment.model';
 
@@ -36,37 +40,78 @@ export class AssignmentList implements OnInit {
 
   confirmingAssignmentId: number | null = null;
 
+  isAdmin = false;
+  isEmployee = false;
+
   constructor(
-    private readonly assignmentService: AssignmentService
+    private readonly assignmentService: AssignmentService,
+    private readonly authService: AuthService
   ) {}
 
   ngOnInit(): void {
+    this.isAdmin = this.authService.isAdmin();
+    this.isEmployee = this.authService.isEmployee();
+
     this.loadAssignments();
   }
 
   loadAssignments(): void {
     this.loading = true;
 
-    this.assignmentService.getAll().subscribe({
-      next: (assignments) => {
-        this.assignments = assignments;
-        this.loading = false;
-      },
+    if (this.isAdmin) {
+      this.assignmentService.getAll().subscribe({
+        next: (assignments) => {
+          this.assignments = assignments;
+          this.loading = false;
+        },
 
-      error: (error) => {
-        console.error(
-          'Failed to load assignments',
-          error
-        );
+        error: (error) => {
+          console.error(
+            'Failed to load assignments',
+            error
+          );
 
-        this.loading = false;
-      }
-    });
+          this.loading = false;
+        }
+      });
+
+      return;
+    }
+
+    const employeeId = this.authService.getEmployeeId();
+
+    if (employeeId === null) {
+      this.assignments = [];
+      this.loading = false;
+      return;
+    }
+
+    this.assignmentService
+      .getByEmployee(employeeId)
+      .subscribe({
+        next: (assignments) => {
+          this.assignments = assignments;
+          this.loading = false;
+        },
+
+        error: (error) => {
+          console.error(
+            'Failed to load employee assignments',
+            error
+          );
+
+          this.loading = false;
+        }
+      });
   }
 
   confirmAssignment(
     assignmentId: number
   ): void {
+
+    if (!this.isAdmin) {
+      return;
+    }
 
     this.confirmingAssignmentId =
       assignmentId;

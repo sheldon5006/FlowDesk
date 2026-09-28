@@ -125,7 +125,7 @@
             <td>
 
               @if (
-                assignment.status === 'Pending'
+                isAdmin && assignment.status === 'Pending'
               ) {
 
                 <p-button

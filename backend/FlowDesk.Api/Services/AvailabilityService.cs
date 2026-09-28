@@ -111,5 +111,63 @@ namespace FlowDesk.Api.Services
 
             return true;
         }
+
+        public async Task<AvailabilityDto?> UpdateAsync(
+    int employeeId,
+    int availabilityId,
+    UpdateAvailabilityDto dto)
+        {
+            var availability = await _availabilityRepository
+                .GetByIdAsync(availabilityId);
+
+            if (availability == null)
+            {
+                return null;
+            }
+
+            // Employee can only update their own availability
+            if (availability.EmployeeId != employeeId)
+            {
+                return null;
+            }
+
+            // Business rule: end time must be after start time
+            if (dto.EndTime <= dto.StartTime)
+            {
+                throw new ArgumentException(
+                    "End time must be after start time.");
+            }
+
+            // Business rule: one availability per employee per day
+            var existingAvailability = await _availabilityRepository
+                .Query()
+                .AnyAsync(a =>
+                    a.Id != availabilityId &&
+                    a.EmployeeId == employeeId &&
+                    a.DayOfWeek == dto.DayOfWeek);
+
+            if (existingAvailability)
+            {
+                throw new InvalidOperationException(
+                    "Availability already exists for this day.");
+            }
+
+            availability.DayOfWeek = dto.DayOfWeek;
+            availability.StartTime = dto.StartTime;
+            availability.EndTime = dto.EndTime;
+
+            _availabilityRepository.Update(availability);
+
+            await _availabilityRepository.SaveChangesAsync();
+
+            return new AvailabilityDto
+            {
+                Id = availability.Id,
+                EmployeeId = availability.EmployeeId,
+                DayOfWeek = availability.DayOfWeek,
+                StartTime = availability.StartTime,
+                EndTime = availability.EndTime
+            };
+        }
     }
 }

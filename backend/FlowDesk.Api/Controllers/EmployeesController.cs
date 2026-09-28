@@ -1,12 +1,14 @@
 ﻿using FlowDesk.Api.DTOs;
 using FlowDesk.Api.Services;
 using FlowDesk.Api.Services.Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FlowDesk.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize(Roles = "Admin")]
     public class EmployeesController : ControllerBase
     {
         private readonly IEmployeeService _employeeService;

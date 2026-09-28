@@ -1,0 +1,121 @@
+<form
+  class="user-form"
+  [formGroup]="form"
+  (ngSubmit)="save()"
+>
+
+  <div class="field">
+
+    <label for="email">
+      Email
+    </label>
+
+    <input
+      id="email"
+      pInputText
+      type="email"
+      formControlName="email"
+      placeholder="user@flowdesk.com"
+    />
+
+    @if (
+      form.controls['email'].touched &&
+      form.controls['email'].invalid
+    ) {
+      <small class="error">
+        Enter a valid email address.
+      </small>
+    }
+
+  </div>
+
+  <div class="field">
+
+    <label for="password">
+      Password
+    </label>
+
+    <input
+      id="password"
+      pInputText
+      type="password"
+      formControlName="password"
+      placeholder="Enter password"
+    />
+
+    @if (
+      form.controls['password'].touched &&
+      form.controls['password'].invalid
+    ) {
+      <small class="error">
+        Password is required.
+      </small>
+    }
+
+  </div>
+
+  <div class="field">
+
+    <label for="role">
+      Role
+    </label>
+
+    <p-select
+      inputId="role"
+      formControlName="role"
+      [options]="roles"
+      optionLabel="label"
+      optionValue="value"
+      placeholder="Select role"
+      class="w-full"
+    />
+
+  </div>
+
+  @if (form.controls['role'].value === 'Employee') {
+
+    <div class="field">
+
+      <label for="employee">
+        Employee
+      </label>
+
+      <p-select
+        inputId="employee"
+        formControlName="employeeId"
+        [options]="employees"
+        optionLabel="email"
+        optionValue="id"
+        placeholder="Select employee"
+        [loading]="loadingEmployees"
+        class="w-full"
+      />
+
+      <small class="helper">
+        Link this login account to an employee.
+      </small>
+
+    </div>
+
+  }
+
+  <div class="form-actions">
+
+    <p-button
+      label="Cancel"
+      severity="secondary"
+      [text]="true"
+      type="button"
+      (onClick)="cancel()"
+    />
+
+    <p-button
+      label="Create User"
+      icon="pi pi-check"
+      type="submit"
+      [loading]="loading"
+    />
+
+  </div>
+
+</form>

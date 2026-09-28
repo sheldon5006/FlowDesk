@@ -1,0 +1,65 @@
+<div class="login-page">
+  <div class="login-card">
+
+    <div class="login-header">
+      <h1>FlowDesk</h1>
+      <p>Sign in to your account</p>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="login()">
+
+      <div class="field">
+        <label for="email">Email</label>
+        <input
+          id="email"
+          type="email"
+          pInputText
+          formControlName="email"
+          placeholder="you@example.com"
+        />
+
+        @if (form.controls['email'].touched && form.controls['email'].invalid) {
+          <small class="error">
+            Enter a valid email address.
+          </small>
+        }
+      </div>
+
+      <div class="field">
+        <label for="password">Password</label>
+        <input
+          id="password"
+          type="password"
+          pInputText
+          formControlName="password"
+          placeholder="Enter your password"
+        />
+
+        @if (
+          form.controls['password'].touched &&
+          form.controls['password'].invalid
+        ) {
+          <small class="error">
+            Password is required.
+          </small>
+        }
+      </div>
+
+      @if (errorMessage) {
+        <div class="login-error">
+          {{ errorMessage }}
+        </div>
+      }
+
+      <p-button
+        type="submit"
+        label="Sign In"
+        [loading]="loading"
+        [disabled]="loading"
+        styleClass="login-button"
+      />
+
+    </form>
+
+  </div>
+</div>

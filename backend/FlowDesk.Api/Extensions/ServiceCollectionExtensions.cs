@@ -1,6 +1,8 @@
-﻿using FlowDesk.Api.Repositories;
+﻿using FlowDesk.Api.Models;
+using FlowDesk.Api.Repositories;
 using FlowDesk.Api.Services;
 using FlowDesk.Api.Services.Interface;
+using Microsoft.AspNetCore.Identity;
 
 namespace FlowDesk.Api.Extensions
 {
@@ -19,6 +21,14 @@ namespace FlowDesk.Api.Extensions
             services.AddScoped<IAssignmentService, AssignmentService>();
             services.AddScoped<ISchedulingService, SchedulingService>();
             services.AddScoped<IDashboardService, DashboardService>();
+
+            services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
+            services.AddScoped<IUserService, UserService>();
+
+            // User & authentication
+            services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IAuthService, AuthService>();
 
             return services;
         }
