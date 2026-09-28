@@ -1,59 +1,62 @@
 # FlowDesk
 
-**FlowDesk** is a Workforce Operations & Smart Scheduling Platform built as a practical **software architecture laboratory**.
+FlowDesk is a workforce operations application currently under development.
 
-The project focuses on understanding how real-world software evolves from a simple business idea into a maintainable, scalable system.
+The project is being built as a practical way to strengthen software engineering fundamentals and understand how application architecture evolves as requirements become more complex.
 
-### 🚀 What FlowDesk Does
-
-FlowDesk helps managers manage employees, availability, shifts, and assignments.
-
-Core workflow:
-
-`Employee → Availability → Shift → Candidate Selection → Assignment → Confirmation → Completion`
-
-The system currently includes:
+## Current Features
 
 - Employee management
 - Employee availability
 - Shift management and lifecycle
-- Smart employee candidate selection
+- Scheduling and candidate selection
 - Assignment management
-- Dashboard and workforce overview
-- RESTful API with PostgreSQL
+- Dashboard
+- RESTful API
+- PostgreSQL database
 
-### 🏗️ Architecture
+## Architecture
 
-FlowDesk currently follows a **modular monolith / layered architecture** with clear separation between:
+FlowDesk currently follows a modular monolith / layered architecture with clear separation of responsibilities:
 
 `Controller → Service → Repository → Database`
 
-The goal is to learn how to apply business rules, separation of concerns, dependency injection, DTOs, EF Core, and feature-based frontend architecture before introducing more complex distributed architectures.
+The application focuses on practical use of:
 
-### 🛠️ Tech Stack
+- Business rules
+- Dependency Injection
+- DTOs
+- Entity Framework Core
+- Separation of concerns
+- Feature-based frontend structure
 
-**Backend**
-- .NET 10 / ASP.NET Core Web API
+## Tech Stack
+
+### Backend
+- .NET 10
+- ASP.NET Core Web API
 - Entity Framework Core
 - PostgreSQL
-- REST APIs
-- Dependency Injection
 
-**Frontend**
-- Angular 20
+### Frontend
+- Angular
 - TypeScript
 - PrimeNG
 - RxJS
-- Soft neumorphic UI
 
+## Exploring
 
-### 🎯 Future Project Goal - Possibly
+As the project develops, I’m exploring how additional technologies and architectural approaches could be integrated where they provide real value, including:
 
-FlowDesk is ultimately a learning platform for exploring:
+**AI / LLMs · RAG · Caching · Messaging · Docker / CI/CD · Java / Spring Boot · Distributed Systems**
 
-**Business Rules → Clean Architecture → AI Integration → RAG → Distributed Systems → Microservices**
+These are areas of exploration rather than features currently implemented in FlowDesk.
 
-The knowledge gained from FlowDesk will be reused when designing future software products and business ideas.
+## Status
+
+🚧 Work in progress.
+
+The repository documents the implementation and learning process as FlowDesk evolves.
 
 <img width="1916" height="855" alt="image" src="https://github.com/user-attachments/assets/2383be28-85b2-47fd-a525-63b0e8fd817e" />
 <img width="1870" height="836" alt="image" src="https://github.com/user-attachments/assets/124236a2-61ee-495f-bf8b-8f4e9620ae64" />
