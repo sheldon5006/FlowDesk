@@ -3,6 +3,7 @@ using System;
 using FlowDesk.Api.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FlowDesk.Api.Migrations
 {
     [DbContext(typeof(FlowDeskDbContext))]
-    partial class FlowDeskDbContextModelSnapshot : ModelSnapshot
+    [Migration("20261001102731_AddWarehouses")]
+    partial class AddWarehouses
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -207,36 +210,6 @@ namespace FlowDesk.Api.Migrations
                     b.ToTable("Warehouses");
                 });
 
-            modelBuilder.Entity("FlowDesk.Api.Models.WarehouseLocation", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Code")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("boolean");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<int>("WarehouseId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("WarehouseId", "Code")
-                        .IsUnique();
-
-                    b.ToTable("WarehouseLocations");
-                });
-
             modelBuilder.Entity("FlowDesk.Api.Models.Assignment", b =>
                 {
                     b.HasOne("FlowDesk.Api.Models.Employee", "Employee")
@@ -277,17 +250,6 @@ namespace FlowDesk.Api.Migrations
                     b.Navigation("Employee");
                 });
 
-            modelBuilder.Entity("FlowDesk.Api.Models.WarehouseLocation", b =>
-                {
-                    b.HasOne("FlowDesk.Api.Models.Warehouse", "Warehouse")
-                        .WithMany("Locations")
-                        .HasForeignKey("WarehouseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Warehouse");
-                });
-
             modelBuilder.Entity("FlowDesk.Api.Models.Employee", b =>
                 {
                     b.Navigation("Assignments");
@@ -298,11 +260,6 @@ namespace FlowDesk.Api.Migrations
             modelBuilder.Entity("FlowDesk.Api.Models.Shift", b =>
                 {
                     b.Navigation("Assignments");
-                });
-
-            modelBuilder.Entity("FlowDesk.Api.Models.Warehouse", b =>
-                {
-                    b.Navigation("Locations");
                 });
 #pragma warning restore 612, 618
         }

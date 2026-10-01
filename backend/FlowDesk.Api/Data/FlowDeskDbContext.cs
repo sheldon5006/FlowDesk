@@ -15,6 +15,8 @@ namespace FlowDesk.Api.Data
         public DbSet<Shift> Shifts => Set<Shift>();
         public DbSet<Assignment> Assignments => Set<Assignment>();
         public DbSet<User> Users => Set<User>();
+        public DbSet<Warehouse> Warehouses => Set<Warehouse>();
+        public DbSet<WarehouseLocation> WarehouseLocations => Set<WarehouseLocation>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -44,7 +46,23 @@ namespace FlowDesk.Api.Data
                 })
                 .IsUnique();
 
+            modelBuilder.Entity<Warehouse>()
+                .HasIndex(x => x.Code)
+                .IsUnique();
 
+            modelBuilder.Entity<WarehouseLocation>()
+                .HasIndex(x => new
+                {
+                    x.WarehouseId,
+                    x.Code
+                })
+                .IsUnique();
+
+            modelBuilder.Entity<WarehouseLocation>()
+                .HasOne(x => x.Warehouse)
+                .WithMany(x => x.Locations)
+                .HasForeignKey(x => x.WarehouseId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 
