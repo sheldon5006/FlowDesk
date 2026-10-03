@@ -18,6 +18,9 @@ namespace FlowDesk.Api.Data
         public DbSet<Warehouse> Warehouses => Set<Warehouse>();
         public DbSet<WarehouseLocation> WarehouseLocations => Set<WarehouseLocation>();
         public DbSet<Product> Products => Set<Product>();
+
+        public DbSet<Inventory> Inventory => Set<Inventory>();
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Assignment>()
@@ -68,6 +71,25 @@ namespace FlowDesk.Api.Data
                 .HasIndex(x => x.Sku)
                 .IsUnique();
 
+            modelBuilder.Entity<Inventory>()
+                .HasIndex(x => new
+                {
+                    x.ProductId,
+                    x.WarehouseLocationId
+                })
+                .IsUnique();
+
+            modelBuilder.Entity<Inventory>()
+                .HasOne(x => x.Product)
+                .WithMany(x => x.Inventory)
+                .HasForeignKey(x => x.ProductId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Inventory>()
+                .HasOne(x => x.WarehouseLocation)
+                .WithMany(x => x.Inventory)
+                .HasForeignKey(x => x.WarehouseLocationId)
+                .OnDelete(DeleteBehavior.Cascade);
 
         }
     }

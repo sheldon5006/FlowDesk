@@ -1,9 +1,8 @@
-POST https://localhost:7113/api/products
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6ImFkbWluQGZsb3dkZXNrLmNvbSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFkbWluIiwiZW1wbG95ZWVJZCI6IiIsImV4cCI6MTc5MDg1Nzk5MiwiaXNzIjoiRmxvd0Rlc2suQXBpIiwiYXVkIjoiRmxvd0Rlc2suQ2xpZW50In0.O8-Aav9g4-a1zvLGdnS75g5iZL9ub-XFlRPGwHcguoE
+POST https://localhost:7113/api/warehouses/1/inventory
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyIiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZSI6ImFkbWluQGZsb3dkZXNrLmNvbSIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFkbWluIiwiZW1wbG95ZWVJZCI6IiIsImV4cCI6MTc5MTAzNTI0MiwiaXNzIjoiRmxvd0Rlc2suQXBpIiwiYXVkIjoiRmxvd0Rlc2suQ2xpZW50In0.EZq90pXLzGwT60h34E1waCwevBxMcjSRrwDMILcfOJU
 Content-Type: application/json
 {
-   "sku": "LAP-001",
-  "name": "Lenovo ThinkPad T14",
-  "description": "Business laptop",
-  "reorderThreshold": 10
+   "productId": 1,
+  "warehouseLocationId": 2,
+  "quantity": 25
 }

@@ -13,5 +13,7 @@
         public bool IsActive { get; set; } = true;
 
         public Warehouse Warehouse { get; set; } = null!;
+        public ICollection<Inventory> Inventory { get; set; } = new List<Inventory>();
+
     }
 }
