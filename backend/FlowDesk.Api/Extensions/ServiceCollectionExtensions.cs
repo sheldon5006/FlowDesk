@@ -33,6 +33,7 @@ namespace FlowDesk.Api.Extensions
             services.AddScoped<IWarehouseService, WarehouseService>();
 
             services.AddScoped<IWarehouseLocationService,WarehouseLocationService>();
+            services.AddScoped<IProductService, ProductService>();
 
             return services;
         }

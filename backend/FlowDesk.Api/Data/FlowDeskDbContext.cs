@@ -17,7 +17,7 @@ namespace FlowDesk.Api.Data
         public DbSet<User> Users => Set<User>();
         public DbSet<Warehouse> Warehouses => Set<Warehouse>();
         public DbSet<WarehouseLocation> WarehouseLocations => Set<WarehouseLocation>();
-
+        public DbSet<Product> Products => Set<Product>();
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Assignment>()
@@ -63,6 +63,12 @@ namespace FlowDesk.Api.Data
                 .WithMany(x => x.Locations)
                 .HasForeignKey(x => x.WarehouseId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Product>()
+                .HasIndex(x => x.Sku)
+                .IsUnique();
+
+
         }
     }
 
